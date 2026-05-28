@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { processCallNote } from '../utils/geminiClient';
 import { storage } from '../utils/storage';
 import { Loader2, Send } from 'lucide-react';
