@@ -7,7 +7,7 @@ import VoiceRecorder from './VoiceRecorder';
 
 const SAMPLE_NOTE = "Customer called, name Ravi Kumar, 9849123456. Budget 25 to 30 lakhs. Wants plot near highway. Asked about pattadar passbook and link documents. Very interested, wants to visit site this Sunday. Please call back Saturday evening.";
 
-export default function CallForm({ onAddToast }) {
+export default function CallForm({ onAddToast = () => {} }) {
   const [customerName, setCustomerName] = useState('');
   const [phone, setPhone] = useState('');
   const [callType, setCallType] = useState('First Contact');
@@ -20,14 +20,8 @@ export default function CallForm({ onAddToast }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [summaryData, setSummaryData] = useState(null);
-  const [apiKey, setApiKey] = useState('');
-  const [knowledgeBase, setKnowledgeBase] = useState('');
-
-  useEffect(() => {
-    const settings = storage.getSettings();
-    setApiKey(settings.apiKey);
-    setKnowledgeBase(settings.knowledgeBase);
-  }, []);
+  const [apiKey, setApiKey] = useState(() => storage.getSettings().apiKey);
+  const [knowledgeBase, setKnowledgeBase] = useState(() => storage.getSettings().knowledgeBase);
 
   const handleGenerate = async (e) => {
     e.preventDefault();
@@ -37,7 +31,7 @@ export default function CallForm({ onAddToast }) {
     }
     
     const activeApiKey = apiKey || "AIzaSyCu-lvlW6QGfTNLXydzYgeC7NsuwOU1jpI";
-    
+
     if (!activeApiKey) {
       setError('Gemini API Key is missing. Please set it in Settings.');
       return;
