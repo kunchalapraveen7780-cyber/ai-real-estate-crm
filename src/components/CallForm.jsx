@@ -20,8 +20,8 @@ export default function CallForm({ onAddToast = () => {} }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [summaryData, setSummaryData] = useState(null);
-  const [apiKey, setApiKey] = useState(() => storage.getSettings().apiKey);
-  const [knowledgeBase, setKnowledgeBase] = useState(() => storage.getSettings().knowledgeBase);
+  const [apiKey] = useState(() => storage.getSettings().apiKey);
+  const [knowledgeBase] = useState(() => storage.getSettings().knowledgeBase);
 
   const handleGenerate = async (e) => {
     e.preventDefault();
