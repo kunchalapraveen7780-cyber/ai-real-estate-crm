@@ -26,11 +26,6 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
     
-    // Redirect to settings if no API key is present and not already there
-    if (!settings.apiKey && location.pathname !== '/settings') {
-      navigate('/settings');
-      showToast('Please set your API Key to get started', 'error');
-    }
   }, [location.pathname, navigate]);
 
   const showToast = (message, type = 'success') => {
