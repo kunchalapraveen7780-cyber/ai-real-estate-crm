@@ -35,7 +35,10 @@ export default function CallForm({ onAddToast }) {
       setError('Please enter call notes.');
       return;
     }
-    if (!apiKey) {
+    
+    const activeApiKey = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
+    
+    if (!activeApiKey) {
       setError('Gemini API Key is missing. Please set it in Settings.');
       return;
     }
@@ -45,7 +48,7 @@ export default function CallForm({ onAddToast }) {
     setSummaryData(null);
 
     try {
-      const result = await processCallNote(note, customerName, phone, callType, apiKey, knowledgeBase);
+      const result = await processCallNote(note, customerName, phone, callType, activeApiKey, knowledgeBase);
       setSummaryData(result);
       onAddToast('Summary generated successfully', 'success');
     } catch (err) {
