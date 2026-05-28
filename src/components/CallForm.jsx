@@ -30,7 +30,7 @@ export default function CallForm({ onAddToast = () => {} }) {
       return;
     }
     
-    const activeApiKey = apiKey || "AIzaSyCu-lvlW6QGfTNLXydzYgeC7NsuwOU1jpI";
+    const activeApiKey = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
 
     if (!activeApiKey) {
       setError('Gemini API Key is missing. Please set it in Settings.');
